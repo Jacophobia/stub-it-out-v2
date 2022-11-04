@@ -42,6 +42,8 @@ public:
     [[nodiscard]] auto is_version_request() const -> bool;
     [[nodiscard]] auto is_help_request() const -> bool;
 private:
-    std::map<setting_key, std::string> args_;
+    auto add_kv_pair(const std::string& k, const std::string& v) -> void;
+    
+    std::map<setting_key, setting_value> args_;
     std::string first_arg_;
 };

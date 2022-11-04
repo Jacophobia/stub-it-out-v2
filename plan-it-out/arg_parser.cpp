@@ -10,6 +10,8 @@ constexpr int minimum_args = 2;
 constexpr int filepath_arg = 1;
 constexpr int arg_pair_size = 2;
 
+
+
 /*
  Command Line Argument Constructor
   Creates pairings of all command line arguments and saves them to
@@ -25,13 +27,13 @@ arg_parser::arg_parser(const int argc, char** argv)
     first_arg_ = argv[filepath_arg];
 
     // check to see if the pairing is off.
-    if (!(argc % arg_pair_size))
+    if (!(argc % arg_pair_size + filepath_arg))
         throw std::exception(invalid_arguments_message);
 
     // store the other args
     for (int i = minimum_args; i < argc; i += arg_pair_size)
     {
-        args_.emplace(string_to_setting_key(argv[i]), argv[i + 1]);
+        add_kv_pair(argv[i], argv[i + 1]);
     }
 }
 
@@ -69,16 +71,8 @@ auto arg_parser::get_settings() const -> settings
     assert(!is_help_request());
     assert(!is_version_request());
     assert(!first_arg_.empty());
- 
-    switch (args_.at()) {
-    case "python3":
-        return settings {
-            python3
-        };
-    default:
-        assert(false); // invalid setting_value
-        throw std::exception(invalid_language);
-    }
+    
+    return { args_.at(language) };
 }
 
 auto arg_parser::get_filepath() const -> std::string
@@ -100,4 +94,9 @@ auto arg_parser::is_version_request() const -> bool
 auto arg_parser::is_help_request() const -> bool
 {
     return first_arg_ == "-h" || first_arg_ == "--help";
+}
+
+auto arg_parser::add_kv_pair(const std::string &k, const std::string &v) -> void
+{
+    args_.emplace(string_to_setting_key(k), string_to_setting_value(v));
 }

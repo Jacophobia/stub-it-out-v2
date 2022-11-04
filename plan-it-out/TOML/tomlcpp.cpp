@@ -24,6 +24,10 @@
   SOFTWARE.
 
 */
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "tomlcpp.hpp"
 #include "toml.h"
 #include <cstring>
@@ -52,8 +56,7 @@ struct toml::Backing {
   toml_table_t *root = 0;
   Backing(const string &conf) {
     ptr = new char[conf.length() + 1];
-    // I updated this here so there may be errors - Jacob
-    strcpy_s(ptr, sizeof ptr, conf.c_str());
+    strcpy(ptr, conf.c_str());
   }
   ~Backing() {
     if (ptr)
@@ -355,12 +358,12 @@ toml::Result toml::parseFile(const string &path) {
   toml::Result ret;
   std::ifstream stream(path);
   if (!stream) {
-    // I updated this here so there may be errors - Jacob
-    char error_buffer[200];
-    strerror_s(error_buffer, sizeof error_buffer, errno);
-    ret.errmsg = error_buffer;
+    ret.errmsg = strerror(errno);
     return ret;
   }
   string conf(std::istreambuf_iterator<char>{stream}, {});
   return toml::parse(conf);
 }
+
+
+#undef _CRT_SECURE_NO_WARNINGS

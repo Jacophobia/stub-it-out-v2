@@ -1,6 +1,11 @@
 ﻿#pragma once
 
+#include <memory>
 #include <string>
+
+#define _CRT_SECURE_NO_WARNINGS
+#include "TOML/tomlcpp.hpp"
+#undef _CRT_SECURE_NO_WARNINGS
 
 #include "settings.h"
 #include "Project/project.h"
@@ -26,6 +31,18 @@ public:
     // parse from file
     [[nodiscard]] auto parse() const -> project*;
 private:
+    [[nodiscard]] auto get_table() const -> std::shared_ptr<toml::Table>;
+
+    typedef std::shared_ptr<toml::Table> toml_table;
+    
+    auto convert_to_project(const toml_table& table) const -> project*;
+
+    auto add_methods(const toml_table& table, project::builder&) const -> void;
+
+    auto add_classes(const toml_table& table, project::builder&) const -> void;
+
+    auto add_functions(const toml_table& table, project::builder&) const -> void;
+    
     std::string path_;
     settings settings_;
 };

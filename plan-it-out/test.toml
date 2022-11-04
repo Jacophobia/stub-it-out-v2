@@ -1,0 +1,31 @@
+[[classes]]
+name = "string"
+parent = "class"
+children = [
+    "class",
+    "class"
+]
+variables = { var1 = "data type", var2 = "data type" }
+methods = [
+    "method", 
+    "methode"
+]
+
+[[method]]
+name = "string"
+class = "class"
+parameters = { param1 = "data type", param2 = "data type" }
+calls = [
+    "function or method",
+    "function or method"
+]
+returns = "data type"
+
+[[function]]
+name = "string"
+parameters = { param1 = "data type", param2 = "data type" }
+calls = [
+    "function or method",
+    "function or method"
+]
+returns = "data type"

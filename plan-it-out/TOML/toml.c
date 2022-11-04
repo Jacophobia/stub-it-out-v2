@@ -24,6 +24,10 @@
   SOFTWARE.
 
 */
+#pragma warning( disable : 4267)
+#pragma warning( disable : 4244)
+#define _CRT_SECURE_NO_WARNINGS
+
 #define _POSIX_C_SOURCE 200809L
 #include "toml.h"
 #include <assert.h>
@@ -34,9 +38,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#pragma warning( disable : 4267)
-#pragma warning( disable : 4244)
 
 static void *(*ppmalloc)(size_t) = malloc;
 static void (*ppfree)(void *) = free;
@@ -1498,13 +1499,8 @@ toml_table_t *toml_parse_file(FILE *fp, char *errbuf, int errbufsz) {
     errno = 0;
     int n = fread(buf + off, 1, bufsz - off, fp);
     if (ferror(fp)) {
-      // I updated this here so there may be errors - Jacob
-      char error_buffer[200];
-      if (errno)
-        strerror_s(error_buffer, sizeof error_buffer, errno);
-      
       snprintf(errbuf, errbufsz, "%s",
-               errno ? error_buffer : "Error reading file");
+               errno ? strerror(errno) : "Error reading file");
       xfree(buf);
       return 0;
     }
@@ -2385,3 +2381,6 @@ static int parse_millisec(const char *p, const char **endp) {
   *endp = p;
   return ret;
 }
+
+
+#undef _CRT_SECURE_NO_WARNINGS
