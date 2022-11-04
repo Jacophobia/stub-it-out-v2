@@ -11,7 +11,7 @@ methods = [
     "methode"
 ]
 
-[[method]]
+[[methods]]
 name = "string"
 class = "class"
 parameters = { param1 = "data type", param2 = "data type" }
@@ -21,7 +21,7 @@ calls = [
 ]
 returns = "data type"
 
-[[function]]
+[[functions]]
 name = "string"
 parameters = { param1 = "data type", param2 = "data type" }
 calls = [
