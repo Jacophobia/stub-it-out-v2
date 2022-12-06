@@ -1,7 +1,5 @@
 ﻿#include "linker.h"
 
-#include <cassert>
-
 const auto invalid_class_and_method_link = "Linking Error: there was a missing reference between a class and method";
 const auto reference_declaration_number_mismatch = "Linking Error: number of references doesn't match number of declarations";
 const auto caller_callee_number_mismatch = "Linking Error: attempted to call an undeclared method/function";
