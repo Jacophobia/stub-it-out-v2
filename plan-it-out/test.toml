@@ -1,31 +1,40 @@
 [[classes]]
-name = "string"
-parent = "class"
+name = "class1"
 children = [
-    "class",
-    "class"
+    "class2"
 ]
-variables = { var1 = "data type", var2 = "data type" }
+
+[[classes]]
+name = "class2"
+parent = "class1"
+variables = { var1 = "int", var2 = "float" }
 methods = [
-    "method", 
-    "methode"
+    "method1", 
+    "method2"
 ]
 
 [[methods]]
-name = "string"
-class = "class"
-parameters = { param1 = "data type", param2 = "data type" }
+name = "method1"
+class = "class2"
+parameters = { param1 = "int", param2 = "float" }
+returns = "int"
+
+[[methods]]
+name = "method2"
+class = "class2"
 calls = [
-    "function or method",
-    "function or method"
+    "class2:method1",
+    "function1"
 ]
-returns = "data type"
 
 [[functions]]
-name = "string"
-parameters = { param1 = "data type", param2 = "data type" }
+name = "function1"
+
+[[functions]]
+name = "function2"
+parameters = { param1 = "int", param2 = "float" }
 calls = [
-    "function or method",
-    "function or method"
+    "function1",
+    "class2:method2"
 ]
-returns = "data type"
+returns = "int"

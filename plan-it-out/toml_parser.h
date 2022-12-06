@@ -20,7 +20,7 @@ public:
     toml_parser(std::string path, const settings& settings);
 
     // destructor
-    ~toml_parser();
+    ~toml_parser() = default;
 
     // copy / move
     toml_parser(const toml_parser& rhs);
@@ -34,14 +34,14 @@ private:
     [[nodiscard]] auto get_table() const -> std::shared_ptr<toml::Table>;
 
     typedef std::shared_ptr<toml::Table> toml_table;
-    
-    auto convert_to_project(const toml_table& table) const -> project*;
 
-    auto add_methods(const toml_table& table, project::builder&) const -> void;
+    [[nodiscard]] static auto convert_to_project(const toml_table& table) -> project*;
 
-    auto add_classes(const toml_table& table, project::builder&) const -> void;
+    static auto add_methods(const toml_table& table, project::builder&) -> void;
 
-    auto add_functions(const toml_table& table, project::builder&) const -> void;
+    static auto add_classes(const toml_table& table, project::builder&) -> void;
+
+    static auto add_functions(const toml_table& table, project::builder&) -> void;
     
     std::string path_;
     settings settings_;

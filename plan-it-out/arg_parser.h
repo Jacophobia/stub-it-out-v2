@@ -21,7 +21,7 @@ public:
     arg_parser() = delete;
 
     // destructor
-    ~arg_parser();
+    ~arg_parser() = default;
 
     // with command line arguments
     arg_parser(int argc, char **argv);

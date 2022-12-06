@@ -37,11 +37,6 @@ arg_parser::arg_parser(const int argc, char** argv)
     }
 }
 
-arg_parser::~arg_parser()
-{
-    assert(false); // not yet implemented
-}
-
 arg_parser::arg_parser(const arg_parser& rhs)
 {
     assert(false); // not yet implemented

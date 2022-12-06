@@ -21,8 +21,8 @@ public:
     auto operator=(linker&& rhs) noexcept -> linker&;
 
     // link project internals together
-    auto link(project& proj) -> void;
     auto link(project* proj) -> void;
+    auto link(project& proj) -> void;
 private:
     settings settings_;
 };

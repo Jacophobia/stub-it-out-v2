@@ -3,6 +3,13 @@
 #include <string>
 
 /*
+ * Potential Settings
+ * Require two way link between classes
+ *   requires that the parents specify which classes are their children
+ *   and child classes also specify which class is their parent
+ */
+
+/*
  Setting Keys
   Keys representing each of the possible settings entered via command
   line.
