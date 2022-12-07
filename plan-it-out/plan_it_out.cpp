@@ -1,8 +1,6 @@
-﻿
-
-
-#include "arg_parser.h"
+﻿#include "arg_parser.h"
 #include "display.h"
+#include "file_writer.h"
 #include "linker.h"
 #include "toml_parser.h"
 #include "Templates/python3.h"
@@ -40,11 +38,11 @@ auto toml_to_code(const int argc, char **argv) -> void
         // map each value to file object, isolating classes and
         // grouping functions
         const std::unique_ptr<to_file_strategy> converter = std::make_unique<python3_template>();
-        auto [filepath, file_content] = converter->to_file(project->get_class("class2"));
-        println(filepath);
-        println(file_content);
+        const auto files = converter->to_files(project);
         // write the content of each file object to a file in the
         // setting_value specified by the user
+        file_writer writer;
+        writer.write(files);
     }
     catch (std::exception& error)
     {

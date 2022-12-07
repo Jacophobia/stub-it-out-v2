@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="arg_parser.cpp" />
     <ClCompile Include="display.cpp" />
+    <ClCompile Include="file_writer.cpp" />
     <ClCompile Include="linker.cpp" />
     <ClCompile Include="plan_it_out.cpp" />
     <ClCompile Include="Project\class.cpp" />
@@ -249,6 +250,7 @@
   <ItemGroup>
     <ClInclude Include="arg_parser.h" />
     <ClInclude Include="display.h" />
+    <ClInclude Include="file_writer.h" />
     <ClInclude Include="linker.h" />
     <ClInclude Include="Project\class.h" />
     <ClInclude Include="Project\file.h" />

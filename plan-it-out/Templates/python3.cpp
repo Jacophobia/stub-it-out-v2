@@ -66,15 +66,19 @@ auto get_variable_strings(variable_iter begin, const variable_iter& end) -> std:
     return variable_strings;
 }
 
-auto get_parameter_strings(variable_iter begin, const variable_iter& end) -> std::string
+auto get_parameter_strings(variable_iter begin, const variable_iter& end, bool function = false) -> std::string
 {
     std::string parameter_string;
     
-    for (; begin != end; ++begin)
+    for (bool first = true; begin != end; ++begin)
     {
         auto parameter_name = begin->first;
         auto parameter_type = begin->second;
-        parameter_string.append(", " + parameter_name + ": " + parameter_type);
+        if (function && first)
+            parameter_string.append(parameter_name + ": " + parameter_type);
+        else
+            parameter_string.append(", " + parameter_name + ": " + parameter_type);
+        first = false;
     }
 
     return parameter_string;
@@ -115,16 +119,23 @@ auto python3_template::to_file(class_prototype *p_class) -> file
     return { class_name + ".py", class_string };
 }
 
-auto python3_template::to_file(method_prototype *p_method) -> file
-{
-    assert(false); // not yet implemented
-    return {};
-}
-
 auto python3_template::to_file(function_prototype *p_function) -> file
 {
-    assert(false); // not yet implemented
-    return {};
+    std::string function_string;
+    
+    auto [param_begin, param_end] = p_function->get_parameters_iter();
+    const auto parameters = get_parameter_strings(param_begin, param_end, true);
+    auto return_type = p_function->get_return_type();
+        
+    if (return_type == "void")
+        return_type = "None";
+        
+    function_string.append(
+        "    def " + p_function->get_name() + "(" + parameters + ") -> " + return_type + ":\n"
+        "        pass\n\n"
+    );
+    
+    return { "main.py", function_string };
 }
 
 

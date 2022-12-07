@@ -11,8 +11,7 @@ public:
     python3_template(python3_template &&rhs) noexcept;
     python3_template & operator=(const python3_template &rhs);
     python3_template & operator=(python3_template &&rhs) noexcept;
-
+protected:
     auto to_file(class_prototype *p_class) -> file override;
-    auto to_file(method_prototype *p_method) -> file override;
     auto to_file(function_prototype *p_function) -> file override;
 };
