@@ -5,6 +5,8 @@
 #include "display.h"
 #include "linker.h"
 #include "toml_parser.h"
+#include "Templates/python3.h"
+#include "Templates/to_file_strategy.h"
 
 auto toml_to_code(const int argc, char **argv) -> void
 {
@@ -37,7 +39,10 @@ auto toml_to_code(const int argc, char **argv) -> void
         linker.link(project);
         // map each value to file object, isolating classes and
         // grouping functions
-
+        const std::unique_ptr<to_file_strategy> converter = std::make_unique<python3_template>();
+        auto [filepath, file_content] = converter->to_file(project->get_class("class2"));
+        println(filepath);
+        println(file_content);
         // write the content of each file object to a file in the
         // setting_value specified by the user
     }

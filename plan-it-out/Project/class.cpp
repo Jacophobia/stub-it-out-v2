@@ -65,6 +65,16 @@ auto class_prototype::get_method(const std::string &name) const -> std::pair<boo
     return { false, nullptr };
 }
 
+auto class_prototype::get_variable_iter() -> std::pair<variable_iter, variable_iter>
+{
+    return { variables_.begin(), variables_.end() };
+}
+
+auto class_prototype::get_method_iter() -> std::pair<method_iter, method_iter>
+{
+    return { methods_.begin(), methods_.end() };
+}
+
 auto class_prototype::contains_method(const std::string &method_name) -> bool
 {
     return std::ranges::any_of(

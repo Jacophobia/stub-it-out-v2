@@ -24,10 +24,13 @@ public:
 
     // type definitions (for readability)
     typedef std::vector<std::string>::iterator call_name_iter;
+    typedef std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const std::string, std::string>>>> parameters_iter;
 
     // getters
     [[nodiscard]] auto get_name() const -> std::string;
+    [[nodiscard]] auto get_return_type() const -> std::string;
     [[nodiscard]] auto get_call_names_iter() -> std::pair<call_name_iter, call_name_iter>;
+    [[nodiscard]] auto get_parameters_iter() -> std::pair<parameters_iter, parameters_iter>;
 
     // validation
     [[nodiscard]] auto valid_calls() const -> bool;

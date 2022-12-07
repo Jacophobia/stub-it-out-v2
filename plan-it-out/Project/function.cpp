@@ -57,9 +57,19 @@ auto function_prototype::get_name() const -> std::string
     return name_;
 }
 
+auto function_prototype::get_return_type() const -> std::string
+{
+    return returns_.empty() ? "void" : returns_;
+}
+
 auto function_prototype::get_call_names_iter() -> std::pair<call_name_iter, call_name_iter>
 {
     return { calls_names_.begin(), calls_names_.end() };
+}
+
+auto function_prototype::get_parameters_iter() -> std::pair<parameters_iter, parameters_iter>
+{
+    return { parameters_.begin(), parameters_.end() };
 }
 
 auto function_prototype::valid_calls() const -> bool
