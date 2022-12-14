@@ -3,8 +3,12 @@
 #include "file_writer.h"
 #include "linker.h"
 #include "toml_parser.h"
+#include "Templates/cplusplus_template.h"
 #include "Templates/python3.h"
 #include "Templates/to_file_strategy.h"
+#include "Templates/typescript_template.h"
+
+// C:\Users\Jacob\Documents\Documents\edu\Fall2022\SeniorProject\plan-it-out\plan-it-out\x64\Debug\plan-it-out.exe test.toml --language cpp
 
 auto toml_to_code(const int argc, char **argv) -> void
 {
@@ -37,7 +41,21 @@ auto toml_to_code(const int argc, char **argv) -> void
         linker.link(project);
         // map each value to file object, isolating classes and
         // grouping functions
-        const std::unique_ptr<to_file_strategy> converter = std::make_unique<python3_template>();
+        std::unique_ptr<to_file_strategy> converter;
+        switch (settings.language)
+        {
+        case python3:
+            converter = std::make_unique<python3_template>();
+            break;
+        case cplusplus:
+            converter = std::make_unique<cplusplus_template>();
+            break;
+        case typescript:
+            converter = std::make_unique<typescript_template>();
+            break;
+        default:
+            return;
+        }
         const auto files = converter->to_files(project);
         // write the content of each file object to a file in the
         // setting_value specified by the user

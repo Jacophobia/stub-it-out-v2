@@ -13,17 +13,17 @@ auto string_to_setting_key(const std::string& str) -> setting_key
 
 auto string_to_setting_value(const std::string &str) -> setting_value
 {
-    if (str == "python3")
+    if (str == "python3" || str == "py")
         return python3;
-    if (str == "cplusplus")
+    if (str == "cplusplus" || str == "cpp")
         return cplusplus;
     if (str == "java")
         return java;
-    if (str == "csharp")
+    if (str == "csharp" || str == "cs")
         return csharp;
-    if (str == "javascript")
+    if (str == "javascript" || str == "js")
         return javascript;
-    if (str == "typescript")
+    if (str == "typescript" || str == "ts")
         return typescript;
 
     throw std::exception(invalid_argument_value);

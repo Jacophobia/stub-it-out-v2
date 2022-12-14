@@ -241,8 +241,10 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="settings.cpp" />
+    <ClCompile Include="Templates\cplusplus_template.cpp" />
     <ClCompile Include="Templates\python3.cpp" />
     <ClCompile Include="Templates\to_file_strategy.cpp" />
+    <ClCompile Include="Templates\typescript_template.cpp" />
     <ClCompile Include="TOML\toml.c" />
     <ClCompile Include="TOML\tomlcpp.cpp" />
     <ClCompile Include="toml_parser.cpp" />
@@ -258,15 +260,17 @@
     <ClInclude Include="Project\method.h" />
     <ClInclude Include="Project\project.h" />
     <ClInclude Include="settings.h" />
+    <ClInclude Include="Templates\cplusplus_template.h" />
     <ClInclude Include="Templates\python3.h" />
     <ClInclude Include="Templates\to_file_strategy.h" />
+    <ClInclude Include="Templates\typescript_template.h" />
     <ClInclude Include="TOML\toml.h" />
     <ClInclude Include="TOML\tomlcpp.hpp" />
     <ClInclude Include="toml_parser.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="NewProject\test.toml" />
     <Content Include="README.md" />
-    <Content Include="test.toml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
